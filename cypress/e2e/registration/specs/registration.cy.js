@@ -1,7 +1,7 @@
 import { mainPage } from "../../../pages/mainPage.cy.js";
-import { registrationPage } from "../../../pages/registrationPage.cy.js";
 import { getFakeData } from "../testData/fakeUserData";
 import { registrationExpectation } from "../expectations/expectations";
+import { registrationPage } from "../../../pages/registrationPage.cy";
 
 const validFieldsData = getFakeData();
 
@@ -9,6 +9,7 @@ describe("Registration", () => {
   beforeEach(() => {
     cy.visit("/");
   });
+
   afterEach(() => {
     cy.writeFile(
       "cypress/e2e/registration/testData/userRegistry/lastUser.json",
@@ -17,21 +18,12 @@ describe("Registration", () => {
   });
 
   it("New valid user", () => {
+    cy.allure()
+      .feature("Registration new valid random user")
+      .tag("Registration");
+
     mainPage.goToRegistration();
-
-    registrationPage
-      .selectMale()
-      .enterFirstName(validFieldsData)
-      .enterLastName(validFieldsData)
-      .enterBirthDay(validFieldsData)
-      .enterBirthMonth(validFieldsData)
-      .enterBirthYear(validFieldsData)
-      .enterCompany(validFieldsData)
-      .enterEMail(validFieldsData)
-      .enterPassword(validFieldsData)
-      .enterConfirmPassword(validFieldsData)
-      .confirmRegistration();
-
+    registrationPage.loginUser(validFieldsData);
     registrationExpectation.shouldBeValidMessage();
   });
 });

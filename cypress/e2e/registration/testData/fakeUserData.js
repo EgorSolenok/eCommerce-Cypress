@@ -16,8 +16,6 @@ const eMail = faker.internet.email();
 const company = faker.company.name();
 const password = faker.internet.password();
 
-console.log(faker.datatype.number({ min: 1970, max: 2000 }));
-
 export const getFakeData = () => {
   return {
     gender,
