@@ -1,4 +1,4 @@
-import { ACCOUNT_BUTTON_NAME } from "../constants/buttonNames";
+import { ACCOUNT_BUTTON_NAME } from "../constants/constants";
 
 const SELECTORS = {
   ACCOUNT_BUTTON: ".ico-account",

@@ -23,7 +23,7 @@ describe("Registration", () => {
       .tag("Registration");
 
     mainPage.goToRegistration();
-    registrationPage.loginUser(validFieldsData);
+    registrationPage.signUpUser(validFieldsData);
     registrationExpectation.shouldBeValidMessage();
   });
 });

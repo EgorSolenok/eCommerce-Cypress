@@ -96,7 +96,7 @@ export const registrationPage = {
     return registrationPage;
   },
 
-  loginUser: (fieldsData) => {
+  signUpUser: (fieldsData) => {
     registrationPage
       .selectMale()
       .enterFirstName(fieldsData)

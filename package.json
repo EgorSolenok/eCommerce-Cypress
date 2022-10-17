@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "-": "^0.0.1",
-    "@shelex/cypress-allure-plugin": "^2.33.0"
+    "@shelex/cypress-allure-plugin": "^2.33.0",
+    "cypress-xpath": "^2.0.1"
   }
 }

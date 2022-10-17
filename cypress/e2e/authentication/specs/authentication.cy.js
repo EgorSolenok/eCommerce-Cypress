@@ -15,7 +15,7 @@ describe("Authentication", () => {
       .parameter("Registration data", JSON.stringify(validFieldsData));
 
     mainPage.goToRegistration();
-    registrationPage.loginUser(validFieldsData);
+    registrationPage.signUpUser(validFieldsData);
     mainPage.logOut();
 
     cy.writeFile(
