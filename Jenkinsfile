@@ -1,25 +1,36 @@
 pipeline {
-  agent {
-    // this image provides everything needed to run Cypress
-    docker {
-      image 'cypress/base:10'
+  agent any
+//   {
+//     docker {
+//       image 'cypress/base:10'
+//     }
+//   }
+  parameters {
+    choice(name: 'browser', choices: ['chrome', 'edge', 'firefox'],
+    defaultValue: 'cy:chrome', description: 'Pick testing browser')
+  }
+  options {
+  ansiColor('xterm')
+  }
+  stages {
+    stage('Building') {
+      echo "Building the app"
+    }
+    stage('Testing') {
+    steps {
+      bat 'npm i'
+      bat 'npm run cy:%browser%'
+      }
+    }
+    stage ('Deploying') {
+    echo "Deploy the app"
+      }
     }
   }
-
-  stages {
-    stage('build and test') {
-      environment {
-        // we will be recording test results and video on Cypress dashboard
-        // to record we need to set an environment variable
-        // we can load the record key variable from credentials store
-        // see https://jenkins.io/doc/book/using/using-credentials/
-        CYPRESS_RECORD_KEY = credentials('cypress-example-kitchensink-record-key')
-      }
-
-      steps {
-        sh 'npm ci'
-        sh "npm run test:ci:record"
-      }
+  post {
+    always {
+    allure includeProperties: false, jdk: '', results: [[path: 'allure-results']],
+    archiveArtifacts allowEmptyArchive: true, artifacts: '\'cypress/videos/**/**/**.*mp4\', \'cypress/screenshots/**.**\', \'cypress/logs/**.**\',', followSymlinks: false
     }
   }
 }
