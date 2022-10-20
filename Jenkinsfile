@@ -6,15 +6,16 @@ pipeline {
 //     }
 //   }
   parameters {
-    choice(name: 'browser', choices: ['chrome', 'edge', 'firefox'],
-    defaultValue: 'cy:chrome', description: 'Pick testing browser')
+    choice(name: 'browser', choices: ['chrome', 'edge', 'firefox'], description: 'Pick testing browser')
   }
   options {
   ansiColor('xterm')
   }
   stages {
     stage('Building') {
+    steps {
       echo "Building the app"
+      }
     }
     stage('Testing') {
     steps {
@@ -23,7 +24,9 @@ pipeline {
       }
     }
     stage ('Deploying') {
-    echo "Deploy the app"
+    steps {
+      echo "Deploy the app"
+    }
       }
     }
   post {
