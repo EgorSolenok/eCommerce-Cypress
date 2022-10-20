@@ -26,10 +26,10 @@ pipeline {
     echo "Deploy the app"
       }
     }
-    post {
-        always {
-        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-        archiveArtifacts allowEmptyArchive: true, artifacts: '\'cypress/videos/**/**/**.*mp4\', \'cypress/screenshots/**.**\', \'cypress/logs/**.**\',', followSymlinks: false
-        }
+  post {
+      always {
+      allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+      archiveArtifacts allowEmptyArchive: true, artifacts: '\'cypress/videos/**/**/**.*mp4\', \'cypress/screenshots/**.**\', \'cypress/logs/**.**\',', followSymlinks: false
       }
+    }
   }
